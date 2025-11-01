@@ -479,11 +479,9 @@
                     </div>
     
                  </div>
-                <input type="hidden" id="subject-image-data">
+               <input type="hidden" id="subject-image-data">
                 <div class="flex justify-end space-x-4 mt-8">
-                    <button type="button" onclick="closeStudentModal()" class="bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 px-6 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500">ยกเลิก</button>
-                   
-                 <button type="submit" id="form-submit-btn-subject" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">บันทึก</button>
+                    <button type="button" onclick="closeSubjectModal()" class="bg-gray-200 ...">ยกเลิก</button> <button type="submit" id="form-submit-btn-subject" ...>บันทึก</button>
                 </div>
             </form>
         </div>
@@ -1775,7 +1773,7 @@
                     'มา': item.present,
                 
                      'ขาด': item.absent,
-                    'ลา': : item.leave,
+                    'ลา':  item.leave,
                     '% การเข้าเรียน': attendancePercent
                 };
             });
