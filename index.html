@@ -27,22 +27,26 @@
         .dark .summary-row:hover { background-color: #374151; }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+<body class="bg-emerald-50 dark:bg-gray-950 text-gray-800 dark:text-gray-200 transition-colors duration-300">
 
     <div class="container mx-auto p-4 md:p-6">
-        <header class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <header class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
              <div class="flex items-center space-x-3">
-                <i data-lucide="scan-face" class="text-blue-600 w-8 h-8"></i>
+                <i data-lucide="scan-face" class="text-pink-600 w-8 h-8"></i>
                 <h1 class="text-xl md:text-2xl font-bold text-gray-700 dark:text-gray-200">ระบบเช็คชื่อนักเรียนอัจฉริยะ</h1>
            </div>
             <div class="flex items-center gap-2">
-                <nav class="flex items-center flex-wrap justify-center space-x-1 md:space-x-2 bg-gray-200 dark:bg-gray-700 p-1 rounded-lg">
+                <nav class="flex items-center flex-wrap justify-center space-x-1 md:space-x-2 bg-emerald-100 dark:bg-emerald-900 p-1 rounded-lg">
                     <button onclick="switchTab('dashboard')" id="tab-dashboard" class="px-3 py-1.5 text-sm font-medium rounded-md">Dashboard</button>
                     <button onclick="switchTab('students')" id="tab-students" class="px-3 py-1.5 text-sm font-medium rounded-md">นักเรียน</button>
                     <button onclick="switchTab('attendance')" id="tab-attendance" class="px-3 py-1.5 text-sm font-medium rounded-md">เช็คชื่อ</button>
                     <button onclick="switchTab('manage')" id="tab-manage" class="px-3 py-1.5 text-sm font-medium rounded-md">จัดการรายวิชา</button>
                     <button onclick="switchTab('report')" id="tab-report" class="px-3 py-1.5 text-sm font-medium rounded-md">รายงาน</button>
                  <button onclick="switchTab('summary')" id="tab-summary" class="px-3 py-1.5 text-sm font-medium rounded-md">สรุปผล</button>
+                 <a href="YOUR_URL_HERE" target="_blank" rel="noopener noreferrer" 
+       class="px-3 py-1.5 text-sm font-medium rounded-md text-emerald-700 dark:text-emerald-200 hover:bg-emerald-200 dark:hover:bg-emerald-700 transition-colors duration-200">
+        เมนนูว่าง
+    </a>
                 </nav>
                 <button onclick="toggleTheme()" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5">
                     <i data-lucide="sun" id="theme-icon-sun" class="hidden w-5 h-5"></i>
@@ -53,26 +57,40 @@
 
         <main id="main-content">
             <div id="content-dashboard" class="hidden space-y-6">
-                 <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md">
+                 <div class="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-lg border-2 border-pink-500 dark:border-pink-700">
                  <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
                          <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">ภาพรวมการเข้าเรียน</h2>
                         <input type="date" id="dashboard-date" class="border rounded-lg p-2 w-full sm:w-auto bg-transparent dark:text-gray-200 dark:border-gray-600">
                     </div>
       
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-center">
-                        <div class="bg-blue-100 dark:bg-blue-900/50 p-4 rounded-lg"><h3 class="text-gray-600 dark:text-gray-400">มาเรียน (รวมทุกวิชา)</h3><p id="stat-present" class="text-3xl font-bold text-blue-700 dark:text-blue-400">0</p></div>
-                        <div class="bg-red-100 dark:bg-red-900/50 p-4 rounded-lg"><h3 class="text-gray-600 dark:text-gray-400">ขาด/ลา (รวมทุกวิชา)</h3><p id="stat-absent" class="text-3xl font-bold text-red-700 dark:text-red-400">0</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        
+                        <div class="bg-gradient-to-br from-emerald-500 to-emerald-700 text-white dark:from-emerald-600 dark:to-emerald-800 p-6 rounded-xl shadow-md flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-emerald-100">มาเรียน (รวมทุกวิชา)</h3>
+                                <p id="stat-present" class="text-4xl font-bold">0</p>
+                            </div>
+                            <i data-lucide="user-check-2" class="w-12 h-12 text-emerald-300 opacity-60"></i>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-pink-500 to-pink-700 text-white dark:from-pink-600 dark:to-pink-800 p-6 rounded-xl shadow-md flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium text-pink-100">ขาด/ลา (รวมทุกวิชา)</h3>
+                                <p id="stat-absent" class="text-4xl font-bold">0</p>
+                            </div>
+                            <i data-lucide="user-x-2" class="w-12 h-12 text-pink-300 opacity-60"></i>
+                        </div>
                    </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-6">
-                        <div class="lg:col-span-2 bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                        <div class="lg:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
                        <h3 class="font-semibold mb-2 text-center">สรุปการเข้าเรียนภาพรวม</h3>
                              <div class="max-w-[250px] mx-auto">
                                 <canvas id="attendance-pie-chart"></canvas>
                              </div>
                          </div>
 
-                        <div class="lg:col-span-3 bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                        <div class="lg:col-span-3 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
                             <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
           
                        <h3 class="font-semibold text-gray-800 dark:text-gray-200">ภาพรวมรายวิชา</h3>
@@ -98,7 +116,7 @@
                     </div>
                 </div>
    
-                 <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md">
+                 <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg">
                     <h3 class="font-semibold mb-4">รายชื่อนักเรียนในระบบ</h3>
                      <div id="student-roster-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-h-[60vh] overflow-y-auto custom-scrollbar pr-2"></div>
                      <div id="roster-loading" class="text-center py-8"><div class="loader w-12 h-12 rounded-full border-4 border-gray-200 dark:border-gray-700 mx-auto"></div><p class="mt-4 text-gray-600 dark:text-gray-400">กำลังโหลดข้อมูลนักเรียน...</p></div>
@@ -106,7 +124,7 @@
             </div>
 
             <div id="content-students" class="hidden">
-                 <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md">
+                 <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg">
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
                         <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">จัดการข้อมูลนักเรียน</h2>
                         <button onclick="openStudentModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2 w-full sm:w-auto justify-center">
@@ -137,7 +155,7 @@
            </div>
 
             <div id="content-attendance" class="hidden space-y-6">
-                <div id="start-scan-section" class="text-center bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-md max-w-lg mx-auto">
+                <div id="start-scan-section" class="text-center bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg max-w-lg mx-auto">
                     <h2 class="text-2xl font-bold mb-2">เริ่มการเช็คชื่อ</h2>
                     <p class="text-gray-600 dark:text-gray-400 mb-6">กรุณาเลือกรายวิชาที่ต้องการเช็คชื่อ</p>
        
@@ -165,7 +183,7 @@
                         <select id="subject-select" class="w-full border rounded-lg p-3 bg-transparent dark:text-gray-200 dark:border-gray-600" disabled>
                             <option value="">-- กรุณาเลือกรายวิชา --</option>
                         </select>
-                     </div>
+                   </div>
                     <button id="start-scan-btn" onclick="startScanning()" class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 text-lg font-semibold flex items-center justify-center mx-auto gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
                         <i data-lucide="camera"></i><span>เริ่มเช็คชื่อ</span>
                     </button>
@@ -177,7 +195,7 @@
  
                 
                 <div id="scanning-section" class="hidden space-y-6">
-                    <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md flex flex-col items-center">
+                    <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg flex flex-col items-center">
                         <h2 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">กำลังสแกน... <span id="current-subject-display" class="font-normal text-blue-600 dark:text-blue-400"></span></h2>
    
                          <div class="max-w-xs mx-auto mb-4 w-full">
@@ -209,7 +227,7 @@
                 </div>
         
      
-                 <div id="absence-management-section" class="hidden bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md">
+                 <div id="absence-management-section" class="hidden bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg">
                     <h2 class="text-xl font-bold mb-4">สรุปผลการเช็คชื่อ</h2>
                     <p class="text-gray-600 dark:text-gray-400 mb-4">ตรวจสอบสถานะของนักเรียนและกดบันทึกเพื่อยืนยัน</p>
                     <div id="absent-list" class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar pr-2"></div>
@@ -221,7 +239,7 @@
            </div>
 
             <div id="content-manage" class="hidden space-y-6">
-                <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md">
+                <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg">
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
                         <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">จัดการข้อมูลรายวิชา</h2>
      
@@ -251,7 +269,7 @@
             </div>
 
             <div id="content-report" class="hidden">
-                <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md space-y-4">
+                <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg space-y-4">
                     <h2 class="text-xl font-bold">รายงานสถิติการมาเรียน</h2>
              
                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
@@ -350,7 +368,7 @@
   
         
                  <div id="content-summary" class="hidden">
-                <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md space-y-4">
+                <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg space-y-4">
                     <h2 class="text-xl font-bold">สรุปการมาเรียนและคะแนน</h2>
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                         
@@ -451,10 +469,10 @@
         </main>
     </div>
 
-    <div id="student-modal" class="fixed inset-0 bg-gray-800 bg-opacity-70 flex items-center justify-center p-4 z-40 hidden"><div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar"><h2 id="modal-title" class="text-2xl font-bold mb-6">เพิ่มข้อมูลนักเรียน</h2><form id="student-form" onsubmit="handleStudentFormSubmit(event)"><input type="hidden" id="student-row-index"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div><label for="student-id" class="block font-medium mb-2">รหัสนักเรียน</label><input type="text" id="student-id" class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg p-3" required><label for="student-name" class="block font-medium mb-2 mt-4">ชื่อ-สกุล</label><input type="text" id="student-name" class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg p-3" required><label for="student-class" class="block font-medium mb-2 mt-4">ชั้นเรียน</label><input type="text" id="student-class" class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg p-3" required></div><div class="flex flex-col"><label class="block font-medium mb-2">รูปภาพนักเรียน</label><div id="input-upload" class="flex flex-col items-center"><div class="w-full max-w-xs mx-auto aspect-[4/3] bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden"><img id="image-preview" src="https://placehold.co/400x300/e2e8f0/475569?text=Image" class="w-full h-full object-cover"></div><input type="file" id="image-upload-input" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('image-upload-input').click()" class="bg-indigo-600 text-white px-4 py-2 mt-4 rounded-lg hover:bg-indigo-700 w-full max-w-xs">เลือกไฟล์รูปภาพ</button></div></div></div><input type="hidden" id="student-image-data"><div class="flex justify-end space-x-4 mt-8"><button type="button" onclick="closeStudentModal()" class="bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 px-6 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500">ยกเลิก</button><button type="submit" id="form-submit-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">บันทึก</button></div></form></div></div>
+    <div id="student-modal" class="fixed inset-0 bg-gray-800 bg-opacity-70 flex items-center justify-center p-4 z-40 hidden"><div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar"><h2 id="modal-title" class="text-2xl font-bold mb-6">เพิ่มข้อมูลนักเรียน</h2><form id="student-form" onsubmit="handleStudentFormSubmit(event)"><input type="hidden" id="student-row-index"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div><label for="student-id" class="block font-medium mb-2">รหัสนักเรียน</label><input type="text" id="student-id" class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg p-3" required><label for="student-name" class="block font-medium mb-2 mt-4">ชื่อ-สกุล</label><input type="text" id="student-name" class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg p-3" required><label for="student-class" class="block font-medium mb-2 mt-4">ชั้นเรียน</label><input type="text" id="student-class" class="w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg p-3" required></div><div class="flex flex-col"><label class="block font-medium mb-2">รูปภาพนักเรียน</label><div id="input-upload" class="flex flex-col items-center"><div class="w-full max-w-xs mx-auto aspect-[4/3] bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden"><img id="image-preview" src="https://placehold.co/400x300/e2e8f0/475569?text=Image" class="w-full h-full object-cover"></div><input type="file" id="image-upload-input" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('image-upload-input').click()" class="bg-indigo-600 text-white px-4 py-2 mt-4 rounded-lg hover:bg-indigo-700 w-full max-w-xs">เลือกไฟล์รูปภาพ</button></div></div></div><input type="hidden" id="student-image-data"><div class="flex justify-end space-x-4 mt-8"><button type="button" onclick="closeStudentModal()" class="bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 px-6 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500">ยกเลิก</button><button type="submit" id="form-submit-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">บันทึก</button></div></form></div></div>
 
     <div id="subject-modal" class="fixed inset-0 bg-gray-800 bg-opacity-70 flex items-center justify-center p-4 z-40 hidden">
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar">
             <h2 id="modal-title-subject" class="text-2xl font-bold mb-6">เพิ่มข้อมูลรายวิชา</h2>
             <form id="subject-form" onsubmit="handleSubjectFormSubmit(event)">
                 <input type="hidden" id="subject-row-index">
@@ -500,9 +518,9 @@
         let students = [], subjects = [], attendance = [], checkedInToday = new Map();
         let studentsForAttendance = [];
         let isScanning = false, recognitionInterval = null;
-        let videoDevices = []; // **NEW:** from old system
-        let speechSynthesisInitialized = false; // **NEW:** from old system
-        let isScanningPaused = false; // **NEW:** from old system
+        let videoDevices = [];
+        let speechSynthesisInitialized = false;
+        let isScanningPaused = false;
         let currentGeoLocation = null;
         let currentSubject = '';
         let lastReportDataForLine = [];
@@ -539,7 +557,6 @@
             video = document.getElementById('video');
             overlay = document.getElementById('overlay');
             
-            // **NEW:** Add video play listener here (from V3.4 logic) 
             video.addEventListener('play', () => {
                 document.getElementById('video-loader').style.display = 'none';
                 document.getElementById('video-wrapper').classList.remove('hidden');
@@ -605,7 +622,7 @@
                     faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
                     faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)
                 ]);
-                await getCameraDevices(); // **NEW:** Load camera list
+                await getCameraDevices();
             } catch (error) {
                 console.error('Initialization failed:', error);
                 alert('ไม่สามารถโหลดโมเดล AI ได้ กรุณาลองรีเฟรชหน้าเว็บ');
@@ -624,7 +641,6 @@
                 if (contentEl) contentEl.classList.add('hidden');
                 if (tabEl) {
                   
- 
                      tabEl.classList.remove('bg-blue-600', 'text-white');
                     tabEl.classList.add('text-gray-600', 'dark:text-gray-300');
                 }
@@ -643,9 +659,9 @@
                 await loadSubjectsForTable();
             } else if (tabName === 'attendance') {
             
-                await loadStudentData(); // โหลดนักเรียนทั้งหมดก่อน
-                await loadSubjectsForDropdown(); // โหลดวิชาทั้งหมด
-                await loadClassesForDropdown(); // **NEW:** เรียกฟังก์ชันโหลดชั้นเรียน
+                await loadStudentData();
+                await loadSubjectsForDropdown();
+                await loadClassesForDropdown();
             
             } else if (tabName === 'report') {
                 await loadStudentData();
@@ -669,7 +685,6 @@
                     mode: 'cors',
                     redirect: 'follow',
    
- 
                                       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
@@ -751,12 +766,10 @@
             let presentCount = 0, absentOrLeaveCount = 0;
             const uniqueDailyChecks = new Set();
             filteredForOverall.forEach(rec => {
-                const key = `${rec.timestamp.toDateString()}-${rec.studentid}-${rec.subject}`;
+                const key = `${rec.timestamp.toDateString()}-${rec.id}-${rec.subject}`;
                 if (uniqueDailyChecks.has(key)) return;
                 if (rec.status === 'มาเรียน') {
                     presentCount++;
-                
- 
                 } else {
                     absentOrLeaveCount++;
                 }
@@ -778,19 +791,14 @@
                         
                         let borderColorClass = 'border-gray-300 dark:border-gray-600';
                         if (attendancePercent >= 80) {
-                  
- 
                            borderColorClass = 'border-green-400';
                         } else if (attendancePercent >= 60) {
                             borderColorClass = 'border-yellow-400';
-           
-                         } else if (totalStudents > 0) {
+                        } else if (totalStudents > 0) {
                             borderColorClass = 'border-red-500';
                         }
     
-                       
                          const cardHtml = `
-             
                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-200">
                             <img src="${item.teacherImage || 'https://placehold.co/150x150/e2e8f0/475569?text=?'}" 
                                  class="w-20 h-20 rounded-full object-cover mb-3 border-4 ${borderColorClass}">
@@ -799,39 +807,25 @@
                             <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">${item.teacherName}</p>
     
                             <div class="flex justify-around w-full mb-3">
-                             
- 
                                <div class="text-green-500">
                                     <i data-lucide="user-check" class="mx-auto w-6 h-6"></i>
-                            
-                         <p class="text-xl font-bold">${item.present}</p>
-                  
-                                   <p class="text-xs">มาเรียน</p>
+                                    <p class="text-xl font-bold">${item.present}</p>
+                                    <p class="text-xs">มาเรียน</p>
                                 </div>
-    
                                  <div class="text-red-500">
-                
                                      <i data-lucide="user-x" class="mx-auto w-6 h-6"></i>
-              
-                               <p class="text-xl font-bold">${item.absentOrLeave}</p>
-                                    <p class="text-xs">ขาด/ลา</p>
- 
+                                     <p class="text-xl font-bold">${item.absentOrLeave}</p>
+                                     <p class="text-xs">ขาด/ลา</p>
                                  </div>
-     
                              </div>
     
                             <div class="w-full text-left">
-       
                                  <p class="text-xs text-gray-600 dark:text-gray-300 mb-1">คิดเป็น ${attendancePercent.toFixed(1)}%</p>
                                 <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
-                                 
-                            
-                        <div class="bg-blue-500 h-2 rounded-full" style="width: ${attendancePercent.toFixed(1)}%"></div>
+                                   <div class="bg-blue-500 h-2 rounded-full" style="width: ${attendancePercent.toFixed(1)}%"></div>
                                 </div>
                             </div>
                         </div>
-    
-     
                          `;
                          cardsContainer.innerHTML += cardHtml;
                  });
@@ -840,8 +834,6 @@
                      cardsContainer.innerHTML = `
                         <div class="text-center py-8 md:col-span-2">
                             <i data-lucide="inbox" class="mx-auto w-12 h-12 text-gray-400"></i>
-          
-    
                                <p class="mt-2 text-sm text-gray-500">ไม่มีข้อมูลการเช็คชื่อ</p>
                         </div>
                      `;
@@ -854,8 +846,6 @@
                     <div class="text-center py-8 md:col-span-2">
                         <i data-lucide="server-crash" class="mx-auto w-12 h-12 text-red-400"></i>
                         <p class="mt-2 text-sm text-red-500">ไม่สามารถโหลดข้อมูลได้</p>
-               
- 
                      </div>
                 `;
                  lucide.createIcons();
@@ -878,7 +868,6 @@
         async function loadSubjectsForDropdown() {
             try {
                 await loadSubjects();
- // Use generic loader
                 const subjectSelect = document.getElementById('subject-select');
                 subjectSelect.innerHTML = '<option value="">-- กรุณาเลือกรายวิชา --</option>';
 
@@ -886,21 +875,18 @@
                     subjects.forEach(subject => {
                         const option = new Option(subject.subjectname, subject.subjectname);
                         subjectSelect.appendChild(option);
-               
- 
              });
-                 }
+                }
                 
                subjectSelect.onchange = () => {
                     const selectedValue = subjectSelect.value;
-                    const selectedClassValue = document.getElementById('class-select').value; // **NEW:** ดึงค่า class ที่เลือก
+                    const selectedClassValue = document.getElementById('class-select').value;
                     const teacherInfoDiv = document.getElementById('teacher-info-display');
                     const teacherImage = document.getElementById('teacher-info-image');
                     const teacherSubject = document.getElementById('teacher-info-subject');
                     const teacherName = document.getElementById('teacher-info-name');
 
                     const hasValue = !!selectedValue;
-                    // **MODIFIED:** ต้องเลือกทั้ง class และ subject
                     const buttonsDisabled = !(hasValue && !!selectedClassValue);
                     document.getElementById('start-scan-btn').disabled = buttonsDisabled;
                     document.getElementById('manual-check-btn').disabled = buttonsDisabled;
@@ -908,8 +894,7 @@
                     if (hasValue) {
                         const selectedSubject = subjects.find(s => s.subjectname === selectedValue);
                         if (selectedSubject) {
-                            teacherImage.src = selectedSubject.teacherimage ||
- 'https://placehold.co/150x150/e2e8f0/475569?text=?'; 
+                            teacherImage.src = selectedSubject.teacherimage || 'https://placehold.co/150x150/e2e8f0/475569?text=?'; 
                             teacherSubject.innerText = selectedSubject.subjectname; 
                             teacherName.innerText = `สอนโดย: ${selectedSubject.teachername}`; 
                             teacherInfoDiv.classList.remove('hidden'); 
@@ -922,43 +907,34 @@
                 console.error('Error loading subjects:', error);
             }
         }
-// **NEW FUNCTION:** To populate the class dropdown
         async function loadClassesForDropdown() {
             const classSelect = document.getElementById('class-select');
             classSelect.innerHTML = '<option value="">-- กรุณาเลือกชั้นเรียน --</option>';
-            // ดึงรายชื่อคลาสที่ไม่ซ้ำกันจาก students
             const classes = [...new Set(students.map(s => s.class))].filter(Boolean);
             classes.sort().forEach(className => {
                 classSelect.add(new Option(className, className));
             });
-            // เพิ่ม Event Listener
             classSelect.onchange = () => {
                 const selectedClass = classSelect.value;
                 const subjectSelect = document.getElementById('subject-select');
                 
                 if (selectedClass) {
-                    // ถ้าเลือกชั้นเรียน ให้กรองนักเรียน
                     studentsForAttendance = students.filter(s => s.class === selectedClass);
-                    // เปิดให้เลือกวิชา
                     subjectSelect.disabled = false;
-                    // **สำคัญ:** สร้าง faceMatcher เฉพาะนักเรียนในชั้นนี้
                     updateFaceMatcherForClass(studentsForAttendance);
                 } else {
-                    // ถ้าไม่เลือก
                     studentsForAttendance = [];
                     faceMatcher = null;
                     subjectSelect.disabled = true;
                     subjectSelect.value = '';
                 }
                 
-                // รีเซ็ตปุ่มเมื่อเลือกชั้นเรียนใหม่
                 document.getElementById('start-scan-btn').disabled = true;
                 document.getElementById('manual-check-btn').disabled = true;
                 document.getElementById('teacher-info-display').classList.add('hidden');
             };
         }
 
-        // **NEW FUNCTION:** To build face matcher for selected class only
         async function updateFaceMatcherForClass(filteredStudents) {
             if (filteredStudents.length > 0) {
                 const labeledFaceDescriptors = await Promise.all(filteredStudents.map(async (student) => {
@@ -968,22 +944,20 @@
                             const img = await faceapi.fetchImage(student.imagedatabase64);
                             const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
         
-                         if (detections) return new faceapi.LabeledFaceDescriptors(student.name, [detections.descriptor]);
+                      if (detections) return new faceapi.LabeledFaceDescriptors(student.name, [detections.descriptor]);
                         } catch (e) { console.error(`Could not process image for ${student.name}`, e); }
                     }
                   
                      return null;
                 }));
-                 const validDescriptors = labeledFaceDescriptors.filter(Boolean);
-                faceMatcher = validDescriptors.length > 0 ?
- new faceapi.FaceMatcher(validDescriptors, 0.6) : null;
+                const validDescriptors = labeledFaceDescriptors.filter(Boolean);
+                faceMatcher = validDescriptors.length > 0 ? new faceapi.FaceMatcher(validDescriptors, 0.6) : null;
             } else {
                 faceMatcher = null;
- 
             }
         }
         function startScanning() {
-            initSpeechSynthesis(); // **NEW:** Init speech
+            initSpeechSynthesis();
             const selectedSubject = document.getElementById('subject-select').value;
             if (!selectedSubject) { alert('กรุณาเลือกรายวิชาก่อน'); return; }
             currentSubject = selectedSubject;
@@ -993,7 +967,7 @@
             document.getElementById('scanning-section').classList.remove('hidden');
             document.getElementById('absence-management-section').classList.add('hidden');
             isScanning = true;
-            document.getElementById('camera-select').disabled = true; // **NEW:** Disable dropdown
+            document.getElementById('camera-select').disabled = true;
             startVideo();
         }
         async function startManualCheck() {
@@ -1011,7 +985,7 @@
                 });
                 if (response.success && response.data) {
                     response.data.forEach(rec => {
-                        checkedInToday.set(String(rec.studentid), rec);
+                        checkedInToday.set(String(rec.id), rec);
                     });
                 }
             } catch (error) {
@@ -1034,20 +1008,17 @@
                     item.className = 'flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg';
                     item.id = `student-row-${student.id}`;
   
- 
                                      
                     const studentInfoHtml = `
                         <div class="flex items-center gap-3">
-             
-  
+            
                            <img src="${student.imagedatabase64 || 'https://placehold.co/40x40'}" class="w-10 h-10 rounded-full object-cover">
                             <div>
                                 <p class="font-medium">${student.name}</p>
-    
-               
+  
                                <p class="text-sm text-gray-500">${student.id}</p>
                                </div>
-                      
+                   
                      </div>`;
 
                     item.innerHTML = studentInfoHtml + `<div class="flex items-center gap-2" id="status-container-${student.id}"></div>`;
@@ -1074,7 +1045,6 @@
                     <button onclick="editStatus('${studentId}')" class="text-blue-600 hover:text-blue-800 text-sm p-1">
                         <i data-lucide="edit-2" class="w-4 h-4"></i>
               
- 
                       </button>`;
                  } else {
                 const buttonBaseClasses = "px-3 py-1 text-sm rounded-full transition-colors duration-200";
@@ -1084,7 +1054,6 @@
                         <button onclick="markStatus('${studentId}', 'มาเรียน')" class="${buttonBaseClasses} ${defaultButtonClasses}">มาเรียน</button>
                         <button onclick="markStatus('${studentId}', 'ขาด')" class="${buttonBaseClasses} ${defaultButtonClasses}">ขาด</button>
          
- 
                           <button onclick="markStatus('${studentId}', 'ลา')" class="${buttonBaseClasses} ${defaultButtonClasses}">ลา</button>
                     </div>`;
                  }
@@ -1101,7 +1070,6 @@
                     <button onclick="markStatus('${studentId}', 'มาเรียน')" class="${buttonBaseClasses} ${defaultButtonClasses}">มาเรียน</button>
                     <button onclick="markStatus('${studentId}', 'ขาด')" class="${buttonBaseClasses} ${defaultButtonClasses}">ขาด</button>
                     <button 
- 
  onclick="markStatus('${studentId}', 'ลา')" class="${buttonBaseClasses} ${defaultButtonClasses}">ลา</button>
                 </div>`;
             const existingRecord = checkedInToday.get(String(studentId));
@@ -1111,7 +1079,7 @@
         }
         function stopScanning(showStudentList = true) {
             isScanning = false;
-            document.getElementById('camera-select').disabled = false; // **NEW:** Re-enable dropdown
+            document.getElementById('camera-select').disabled = false;
             if (recognitionInterval) clearInterval(recognitionInterval);
             recognitionInterval = null;
 
@@ -1128,7 +1096,7 @@
                 return;
             }
             
-            if (students.length > 0) {
+            if (studentsForAttendance.length > 0) {
                 document.getElementById('absence-management-section').classList.remove('hidden');
                 populateAttendanceList();
             } else {
@@ -1166,7 +1134,6 @@
             }
         }
         async function finishAttendance() {
-            // **MODIFIED:** Use filtered student list
             studentsForAttendance.forEach(student => {
                 if (!checkedInToday.has(String(student.id))) {
                     
@@ -1174,8 +1141,7 @@
               
                            id: student.id, name: student.name, class: student.class,
                         timestamp: new Date().toISOString(),
-                        location: 
- currentGeoLocation ? `${currentGeoLocation.lat},${currentGeoLocation.lng}` : 'N/A',
+                        location: currentGeoLocation ? `${currentGeoLocation.lat},${currentGeoLocation.lng}` : 'N/A',
                         status: 'ขาด', subject: currentSubject
   
                                        };
@@ -1190,11 +1156,9 @@
                     const response = await apiCall({ 
                         action: 'recordAttendanceBulk', 
                        
- 
                       data: {
                             records: recordsToSave,
                             subject: currentSubject,
-                   
                          date: new Date().toISOString().split('T')[0]
          
                                   } 
@@ -1211,6 +1175,7 @@
             document.getElementById('start-scan-btn').disabled = true;
             document.getElementById('manual-check-btn').disabled = true;
             document.getElementById('subject-select').value = '';
+            document.getElementById('class-select').value = '';
             currentSubject = '';
             document.getElementById('current-subject-display').innerText = '';
             switchTab('dashboard');
@@ -1227,8 +1192,6 @@
             }
             
             const constraints = { video: { deviceId: { exact: selectedDeviceId } } };
-            
-            // Mirroring logic
             const selectedDevice = videoDevices.find(d => d.deviceId === selectedDeviceId);
             const isRearCamera = selectedDevice?.label.toLowerCase().includes('back');
             if (isRearCamera) {
@@ -1239,12 +1202,10 @@
                 overlay.style.transform = "scaleX(-1)";
             }
 
-            // New stream logic with manual .play()
             navigator.mediaDevices.getUserMedia(constraints)
                 .then(stream => {
                     video.srcObject = stream;
-                    video.play(); // <-- **เพิ่มคำสั่งนี้เพื่อบังคับให้เริ่มเล่น**
-                    // The 'play' event listener (in window.onload) will handle the rest
+                    video.play();
                 })
                 .catch(err => {
                     document.getElementById('video-loading-text').innerText = 'ไม่สามารถเปิดกล้องได้!';
@@ -1252,33 +1213,28 @@
                     stopScanning(false);
                 });
         }
-        
+
         function handleRecognition(student) {
-            // **MODIFIED:** Using Speech + Pause logic from old system
             const record = { 
                 id: student.id, name: student.name, class: student.class, 
                 timestamp: new Date().toISOString(), 
-    
-                         location: currentGeoLocation ?
- `${currentGeoLocation.lat},${currentGeoLocation.lng}` : 'N/A', 
+                location: currentGeoLocation ? `${currentGeoLocation.lat},${currentGeoLocation.lng}` : 'N/A', 
                 status: 'มาเรียน', 
                 subject: currentSubject 
             };
             checkedInToday.set(String(student.id), record);
 
-            isScanningPaused = true; // Pause scanning
+            isScanningPaused = true;
             speak(`สวัสดีค่ะ ${student.name} บันทึกแล้วค่ะ`);
-             // Keep visual feedback from new system
             const successOverlay = document.getElementById('scan-success-overlay');
             document.getElementById('scan-success-name').innerText = student.name;
             successOverlay.classList.remove('hidden');
 
             setTimeout(() => {
-                isScanningPaused = false; // Resume scanning
+                isScanningPaused = false;
                 successOverlay.classList.add('hidden');
-            }, 3000); // Pause for 3 seconds
+            }, 3000);
 
-            // Update manual list if it's open
             if (!document.getElementById('absence-management-section').classList.contains('hidden')) {
                 renderStudentStatusControls(student.id);
             }
@@ -1355,18 +1311,17 @@
                     <td class="p-3">${student.name}</td>
                     <td class="p-3">${student.class}</td>
                     <td class="p-3 text-center"></td>`;
-              
-   
+             
                  const actionsCell = row.cells[4];
                 const editButton = document.createElement('button');
                 editButton.className = 'text-blue-600 p-1 hover:underline';
                 editButton.innerHTML = `<i data-lucide="edit" class="inline-block w-4 h-4 mr-1"></i>แก้ไข`;
-                
+              
                  editButton.onclick = () => openStudentModal(student);
                 
  
                    const deleteButton = document.createElement('button');
-                 deleteButton.className = 'text-red-600 p-1 ml-2 hover:underline';
+                deleteButton.className = 'text-red-600 p-1 ml-2 hover:underline';
                 deleteButton.innerHTML = `<i data-lucide="trash-2" class="inline-block w-4 h-4 mr-1"></i>ลบ`;
                 deleteButton.onclick = () => deleteStudent(student.rowIndex);
     
@@ -1385,7 +1340,6 @@
                 if (studentSortOrder === 'asc') {
                     return String(idA).localeCompare(String(idB), undefined, {numeric: true});
             
- 
                  } else {
                     return String(idB).localeCompare(String(idA), undefined, {numeric: true});
                 }
@@ -1411,9 +1365,7 @@
                     closeStudentModal();
                     if (activeTab === 'students') {
                         await loadStudentData(true);
- // Force refresh of student data
                         renderStudentTableForStudentsPage();
- // Re-render the table
                     }
                 } else { 
                     alert('Error: ' + (response.error || 'Unknown error'));
@@ -1432,9 +1384,7 @@
                      if (response.success) { 
                         if (activeTab === 'students') {
                             await loadStudentData(true);
- // Force refresh of student data
                             renderStudentTableForStudentsPage();
- // Re-render the table
                         }
                     } else { 
                         alert('Error: ' + (response.error || 'Unknown error'));
@@ -1511,8 +1461,7 @@
                     <td class="p-3">${subject.teachername}</td>
                     <td class="p-3 text-center"></td>`;
                 
-                const actionsCell = 
- row.cells[3];
+                const actionsCell = row.cells[3];
                 const editButton = document.createElement('button');
   
                                editButton.className = 'text-blue-600 p-1 hover:underline';
@@ -1548,7 +1497,7 @@
                 const response = await apiCall({ action: action, data: subjectData });
                 if (response.success) {
                     closeSubjectModal();
-                    subjects = []; // Force refresh
+                    subjects = [];
                     await loadSubjectsForTable();
                 } else {
                     alert('Error: ' + (response.error || 'Unknown error'));
@@ -1567,7 +1516,6 @@
                      const response = await apiCall({ action: 'deleteSubject', data: { rowIndex } });
                      if (response.success) {
                         subjects = [];
- // Force refresh
                         await loadSubjectsForTable();
                      } else {
                         alert('Error: ' + (response.error || 'Unknown error'));
@@ -1593,7 +1541,7 @@
             }
     
             const subjectFilter = document.getElementById('report-subject-filter');
-            subjectFilter.innerHTML = '<option value="all">ทุกรายวิชา</option>'; // Clear previous
+            subjectFilter.innerHTML = '<option value="all">ทุกรายวิชา</option>';
             subjects.sort((a,b) => a.subjectname.localeCompare(b.subjectname)).forEach(subject => {
                 subjectFilter.add(new Option(subject.subjectname, subject.subjectname));
             });
@@ -1637,11 +1585,12 @@
  
                                  <td class="p-3 text-left">${item.subject}</td>
                                 <td class="p-3 text-center">${item.totalStudents}</td>
-                               
+                              
                                  <td class="p-3 text-center">${item.present}</td>
       
                                    <td class="p-3 text-center">${item.absent}</td>
-                                <td class="p-3 text-center">${item.leave}</td>
+                     
+                           <td class="p-3 text-center">${item.leave}</td>
                     
                          <td class="p-3 text-center font-bold">${item.totalPresent}</td>
    
@@ -1741,18 +1690,16 @@
                     
                     summaryReportData.summary.forEach(item => {
                         const totalAttendance = item.present + item.absent + item.leave;
-                        const attendancePercent 
- = totalAttendance > 0 ? ((item.present / totalAttendance) * 100).toFixed(2) : "0.00";
+                        const attendancePercent = totalAttendance > 0 ? ((item.present / totalAttendance) * 100).toFixed(2) : "0.00";
                         const row = document.createElement('tr');
                         row.className = 'summary-row cursor-pointer';
                         row.onclick = () => showStudentDetail(item.class, item.subject);
       
  
- 
                          row.innerHTML = `
                             <td class="p-3">${item.class}</td>
                             <td class="p-3 font-medium">${item.subject}</td>
-             
+           
   
                                <td class="p-3 text-center">${item.totalStudents}</td>
                             <td class="p-3 text-center text-green-600">${item.present}</td>
@@ -1786,7 +1733,6 @@
                 const leaveCount = studentRecords.filter(r => r.status === 'ลา').length;
       
  
- 
                            const scoreKey = `${student.id}|${subjectName}`;
                 const currentScore = summaryReportData.scores[scoreKey] || '';
     
@@ -1798,16 +1744,16 @@
                     <td class="p-2">${student.name}</td>
                     <td class="p-2 text-center">${presentCount}</td>
                     <td class="p-2 text-center">${absentCount}</td>
-      
-                               <td 
- class="p-2 text-center">${leaveCount}</td>
+    
+                               <td class="p-2 text-center">${leaveCount}</td>
                      <td class="p-2 text-center">
                         <input type="number" class="w-20 text-center border rounded p-1 bg-white dark:bg-gray-800"
-                            
+         
        data-studentid="${student.id}"
              
                                    data-class="${className}"
-                               data-subject="${subjectName}"
+                          
+       data-subject="${subjectName}"
                   
                              value="${currentScore}">
                    
@@ -1863,13 +1809,11 @@
                 const attendancePercent = totalAttendance > 0 ? ((item.present / totalAttendance) * 100).toFixed(2) : "0.00";
                 return {
  
- 
                     'ชั้น': item.class,
                     'รายวิชา': item.subject,
                     'นักเรียนทั้งหมด': item.totalStudents,
                     'มา': item.present,
-                
- 
+               
                     'ขาด': item.absent,
                     'ลา': item.leave,
                     '% การเข้าเรียน': attendancePercent
@@ -1913,7 +1857,7 @@
                 return;
             };
             try {
-                await navigator.mediaDevices.getUserMedia({ video: true }); // Ask permission
+                await navigator.mediaDevices.getUserMedia({ video: true });
                 const devices = await navigator.mediaDevices.enumerateDevices();
                 videoDevices = devices.filter(device => device.kind === 'videoinput');
                 cameraSelect.innerHTML = '';
@@ -1940,8 +1884,7 @@
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
-                    pos => { currentGeoLocation 
- = { lat: pos.coords.latitude, lng: pos.coords.longitude }; },
+                    pos => { currentGeoLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude }; },
               
                        () => { console.warn('Could not get location.'); }
                 );
