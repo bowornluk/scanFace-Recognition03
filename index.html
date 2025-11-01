@@ -161,11 +161,11 @@
                         </select>
                     </div>
                    <div class="max-w-xs mx-auto mb-6">
-                         <select id="subject-select" class="w-full border rounded-lg p-3 bg-transparent dark:text-gray-200 dark:border-gray-600">
+                        <label for="subject-select" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 text-left">2. เลือกรายวิชา:</label>
+                        <select id="subject-select" class="w-full border rounded-lg p-3 bg-transparent dark:text-gray-200 dark:border-gray-600" disabled>
                             <option value="">-- กรุณาเลือกรายวิชา --</option>
                         </select>
-       
-                   </div>
+                    </div>
                     <button id="start-scan-btn" onclick="startScanning()" class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 text-lg font-semibold flex items-center justify-center mx-auto gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
                         <i data-lucide="camera"></i><span>เริ่มเช็คชื่อ</span>
                     </button>
@@ -486,7 +486,8 @@
                  </div>
                <input type="hidden" id="subject-image-data">
                 <div class="flex justify-end space-x-4 mt-8">
-                    <button type="button" onclick="closeSubjectModal()" class="bg-gray-200 ...">ยกเลิก</button> <button type="submit" id="form-submit-btn-subject" ...>บันทึก</button>
+                    <button type="button" onclick="closeSubjectModal()" class="bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 px-6 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500">ยกเลิก</button>
+                    <button type="submit" id="form-submit-btn-subject" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">บันทึก</button>
                 </div>
             </form>
         </div>
