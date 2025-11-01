@@ -154,7 +154,12 @@
                         </div>
                     </div>
             
-                  
+                  <div class="max-w-xs mx-auto mb-4">
+                        <label for="class-select" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 text-left">1. เลือกชั้นเรียน:</label>
+                        <select id="class-select" class="w-full border rounded-lg p-3 bg-transparent dark:text-gray-200 dark:border-gray-600">
+                            <option value="">-- กรุณาเลือกชั้นเรียน --</option>
+                        </select>
+                    </div>
                    <div class="max-w-xs mx-auto mb-6">
                          <select id="subject-select" class="w-full border rounded-lg p-3 bg-transparent dark:text-gray-200 dark:border-gray-600">
                             <option value="">-- กรุณาเลือกรายวิชา --</option>
@@ -493,6 +498,7 @@
         let gasWebAppUrl = '';
         let faceMatcher = null, pieChart;
         let students = [], subjects = [], attendance = [], checkedInToday = new Map();
+        let studentsForAttendance = [];
         let isScanning = false, recognitionInterval = null;
         let videoDevices = []; // **NEW:** from old system
         let speechSynthesisInitialized = false; // **NEW:** from old system
@@ -602,8 +608,11 @@
             } else if (tabName === 'manage') { 
                 await loadSubjectsForTable();
             } else if (tabName === 'attendance') {
-                await loadStudentDataForRecognition();
-                await loadSubjectsForDropdown();
+            
+                await loadStudentData(); // โหลดนักเรียนทั้งหมดก่อน
+                await loadSubjectsForDropdown(); // โหลดวิชาทั้งหมด
+                await loadClassesForDropdown(); // **NEW:** เรียกฟังก์ชันโหลดชั้นเรียน
+            
             } else if (tabName === 'report') {
                 await loadStudentData();
                 await loadSubjectsForFilters();
@@ -833,34 +842,92 @@
              });
                 }
                 
-                subjectSelect.onchange = () => {
+               subjectSelect.onchange = () => {
                     const selectedValue = subjectSelect.value;
+                    const selectedClassValue = document.getElementById('class-select').value; // **NEW:** ดึงค่า class ที่เลือก
                     const teacherInfoDiv = document.getElementById('teacher-info-display');
                     const teacherImage = document.getElementById('teacher-info-image');
                     const teacherSubject = document.getElementById('teacher-info-subject');
                     const teacherName = document.getElementById('teacher-info-name');
 
                     const hasValue = !!selectedValue;
-                    document.getElementById('start-scan-btn').disabled = !hasValue;
-                    document.getElementById('manual-check-btn').disabled = !hasValue;
+                    // **MODIFIED:** ต้องเลือกทั้ง class และ subject
+                    const buttonsDisabled = !(hasValue && !!selectedClassValue);
+                    document.getElementById('start-scan-btn').disabled = buttonsDisabled;
+                    document.getElementById('manual-check-btn').disabled = buttonsDisabled;
 
                     if (hasValue) {
                         const selectedSubject = subjects.find(s => s.subjectname === selectedValue);
                         if (selectedSubject) {
-                            teacherImage.src = selectedSubject.teacherimage || 'https://placehold.co/150x150/e2e8f0/475569?text=?';
-                            teacherSubject.innerText = selectedSubject.subjectname;
-                            teacherName.innerText = `สอนโดย: ${selectedSubject.teachername}`;
-                            teacherInfoDiv.classList.remove('hidden');
+                            teacherImage.src = selectedSubject.teacherimage || 'https://placehold.co/150x150/e2e8f0/475569?text=?'; 
+                            teacherSubject.innerText = selectedSubject.subjectname; 
+                            teacherName.innerText = `สอนโดย: ${selectedSubject.teachername}`; 
+                            teacherInfoDiv.classList.remove('hidden'); 
                         }
                     } else {
-                        teacherInfoDiv.classList.add('hidden');
+                        teacherInfoDiv.classList.add('hidden'); 
                     }
                 };
             } catch (error) {
                 console.error('Error loading subjects:', error);
             }
         }
+// **NEW FUNCTION:** To populate the class dropdown
+        async function loadClassesForDropdown() {
+            const classSelect = document.getElementById('class-select');
+            classSelect.innerHTML = '<option value="">-- กรุณาเลือกชั้นเรียน --</option>';
+            // ดึงรายชื่อคลาสที่ไม่ซ้ำกันจาก students [cite: 875, 884]
+            const classes = [...new Set(students.map(s => s.class))].filter(Boolean);
+            classes.sort().forEach(className => {
+                classSelect.add(new Option(className, className));
+            });
 
+            // เพิ่ม Event Listener
+            classSelect.onchange = () => {
+                const selectedClass = classSelect.value;
+                const subjectSelect = document.getElementById('subject-select');
+                
+                if (selectedClass) {
+                    // ถ้าเลือกชั้นเรียน ให้กรองนักเรียน
+                    studentsForAttendance = students.filter(s => s.class === selectedClass);
+                    // เปิดให้เลือกวิชา
+                    subjectSelect.disabled = false;
+                    // **สำคัญ:** สร้าง faceMatcher เฉพาะนักเรียนในชั้นนี้
+                    updateFaceMatcherForClass(studentsForAttendance);
+                } else {
+                    // ถ้าไม่เลือก
+                    studentsForAttendance = [];
+                    faceMatcher = null;
+                    subjectSelect.disabled = true;
+                    subjectSelect.value = '';
+                }
+                
+                // รีเซ็ตปุ่มเมื่อเลือกชั้นเรียนใหม่
+                document.getElementById('start-scan-btn').disabled = true;
+                document.getElementById('manual-check-btn').disabled = true;
+                document.getElementById('teacher-info-display').classList.add('hidden');
+            };
+        }
+
+        // **NEW FUNCTION:** To build face matcher for selected class only
+        async function updateFaceMatcherForClass(filteredStudents) {
+            if (filteredStudents.length > 0) {
+                const labeledFaceDescriptors = await Promise.all(filteredStudents.map(async (student) => {
+                    if (student.imagedatabase64 && student.imagedatabase64.startsWith('data:image')) { [cite: 855]
+                        try {
+                            const img = await faceapi.fetchImage(student.imagedatabase64); [cite: 855]
+                            const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor(); [cite: 855]
+                            if (detections) return new faceapi.LabeledFaceDescriptors(student.name, [detections.descriptor]); [cite: 856]
+                        } catch (e) { console.error(`Could not process image for ${student.name}`, e); }
+                    }
+                    return null; [cite: 857]
+                }));
+                const validDescriptors = labeledFaceDescriptors.filter(Boolean); [cite: 858]
+                faceMatcher = validDescriptors.length > 0 ? new faceapi.FaceMatcher(validDescriptors, 0.6) : null; [cite: 858]
+            } else {
+                faceMatcher = null; [cite: 859]
+            }
+        }
         function startScanning() {
             initSpeechSynthesis(); // **NEW:** Init speech
             const selectedSubject = document.getElementById('subject-select').value;
@@ -907,8 +974,8 @@
             const studentList = document.getElementById('absent-list');
             studentList.innerHTML = '';
             
-            if (students.length > 0) {
-                students.forEach(student => {
+           if (studentsForAttendance.length > 0) {
+                studentsForAttendance.forEach(student => {
                     const item = document.createElement('div');
                     item.className = 'flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg';
                     item.id = `student-row-${student.id}`;
@@ -1039,7 +1106,8 @@
             }
         }
         async function finishAttendance() {
-            students.forEach(student => {
+            // **MODIFIED:** Use filtered student list
+            studentsForAttendance.forEach(student => {
                 if (!checkedInToday.has(String(student.id))) {
                     const absentRecord = {
               
@@ -1150,33 +1218,15 @@
             }
         }
         
-        async function loadStudentDataForRecognition() {
+       async function loadStudentDataForRecognition() {
+            // เราย้าย Logic การสร้าง faceMatcher ไปที่ updateFaceMatcherForClass() แล้ว
+            // ฟังก์ชันนี้จึงแค่ทำการโหลดข้อมูลนักเรียนตามปกติ
             try {
-                await loadStudentData();
-                if (students.length > 0) {
-                    const labeledFaceDescriptors = await Promise.all(students.map(async (student) => {
-                        if (student.imagedatabase64 && student.imagedatabase64.startsWith('data:image')) {
-                            try {
-            
-                                 const img = await faceapi.fetchImage(student.imagedatabase64);
-                                const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
-                                if (detections) return new faceapi.LabeledFaceDescriptors(student.name, [detections.descriptor]);
-  
-                                   } catch (e) { console.error(`Could not process image for ${student.name}`, e); }
-                        }
-                        return null;
-         
-                  }));
-                    const validDescriptors = labeledFaceDescriptors.filter(Boolean);
-                    faceMatcher = validDescriptors.length > 0 ? new faceapi.FaceMatcher(validDescriptors, 0.6) : null;
-                } else {
-                    faceMatcher = null;
-                }
+                 await loadStudentData();
             } catch (err) {
                 console.error('Error loading students for recognition:', err);
             }
         }
-        
         function handleRecognition(student) {
             // **MODIFIED:** Using Speech + Pause logic from old system
             const record = { 
@@ -1767,13 +1817,13 @@
                 const attendancePercent = totalAttendance > 0 ? ((item.present / totalAttendance) * 100).toFixed(2) : "0.00";
                 return {
  
-                                     'ชั้น': item.class,
+                    'ชั้น': item.class,
                     'รายวิชา': item.subject,
                     'นักเรียนทั้งหมด': item.totalStudents,
                     'มา': item.present,
                 
-                     'ขาด': item.absent,
-                    'ลา':  item.leave,
+                    'ขาด': item.absent,
+                    'ลา': item.leave,
                     '% การเข้าเรียน': attendancePercent
                 };
             });
