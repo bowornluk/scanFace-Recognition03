@@ -70,11 +70,22 @@
 
         <main id="main-content">
             <div id="content-dashboard" class="hidden space-y-6">
-                 <div class="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-lg border-2 border-pink-500 dark:border-pink-700">
-                 <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
-                         <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">ภาพรวมการเข้าเรียน</h2>
-                        <input type="date" id="dashboard-date" class="border rounded-lg p-2 w-full sm:w-auto bg-transparent dark:text-gray-200 dark:border-gray-600">
-                    </div>
+               <div class="relative overflow-hidden bg-gradient-to-r from-green-800 via-sky-500 to-blue-900 p-4 sm:p-6 rounded-xl shadow-lg border-2 border-pink-500 dark:border-pink-700 text-white transition-transform duration-500 hover:scale-[1.02] hover:shadow-2xl">
+  
+  <!-- เอฟเฟกต์แสงเคลื่อนไหวเบาๆ -->
+  <div class="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/10 opacity-0 hover:opacity-30 transition-opacity duration-700 rounded-xl pointer-events-none"></div>
+  
+  <div class="relative flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
+    <h2 class="text-lg sm:text-xl font-semibold drop-shadow-md">ภาพรวมการเข้าเรียน</h2>
+    <input 
+      type="date" 
+      id="dashboard-date" 
+      class="border-2 border-white/70 rounded-lg p-2 w-full sm:w-auto bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-300"
+    >
+  </div>
+
+</div>
+
       
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         
