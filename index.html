@@ -29,24 +29,37 @@
 </head>
 <body class="bg-emerald-50 dark:bg-gray-950 text-gray-800 dark:text-gray-200 transition-colors duration-300">
 
-    <div class="container mx-auto p-4 md:p-6">
-        <header class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+   <div class="container mx-auto p-4 md:p-6">
+        <header class="bg-white dark:bg-gray-900 rounded-xl shadow-lg border-2 border-emerald-600 dark:border-emerald-700 p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
              <div class="flex items-center space-x-3">
                 <i data-lucide="scan-face" class="text-pink-600 w-8 h-8"></i>
                 <h1 class="text-xl md:text-2xl font-bold text-gray-700 dark:text-gray-200">ระบบเช็คชื่อนักเรียนอัจฉริยะ</h1>
            </div>
             <div class="flex items-center gap-2">
-                <nav class="flex items-center flex-wrap justify-center space-x-1 md:space-x-2 bg-emerald-100 dark:bg-emerald-900 p-1 rounded-lg">
-                    <button onclick="switchTab('dashboard')" id="tab-dashboard" class="px-3 py-1.5 text-sm font-medium rounded-md">Dashboard</button>
-                    <button onclick="switchTab('students')" id="tab-students" class="px-3 py-1.5 text-sm font-medium rounded-md">นักเรียน</button>
-                    <button onclick="switchTab('attendance')" id="tab-attendance" class="px-3 py-1.5 text-sm font-medium rounded-md">เช็คชื่อ</button>
-                    <button onclick="switchTab('manage')" id="tab-manage" class="px-3 py-1.5 text-sm font-medium rounded-md">จัดการรายวิชา</button>
-                    <button onclick="switchTab('report')" id="tab-report" class="px-3 py-1.5 text-sm font-medium rounded-md">รายงาน</button>
-                 <button onclick="switchTab('summary')" id="tab-summary" class="px-3 py-1.5 text-sm font-medium rounded-md">สรุปผล</button>
-                 <a href="YOUR_URL_HERE" target="_blank" rel="noopener noreferrer" 
-       class="px-3 py-1.5 text-sm font-medium rounded-md text-emerald-700 dark:text-emerald-200 hover:bg-emerald-200 dark:hover:bg-emerald-700 transition-colors duration-200">
-        เมนนูว่าง
-    </a>
+                <nav class="flex items-center flex-wrap justify-center space-x-1 md:space-x-2 bg-emerald-50 dark:bg-emerald-900/50 p-1 rounded-lg">
+                    
+                    <button onclick="switchTab('dashboard')" id="tab-dashboard" class="flex items-center px-3 py-1.5 text-sm font-medium rounded-md">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4 mr-1.5"></i>Dashboard
+                    </button>
+                    <button onclick="switchTab('students')" id="tab-students" class="flex items-center px-3 py-1.5 text-sm font-medium rounded-md">
+                        <i data-lucide="users" class="w-4 h-4 mr-1.5"></i>นักเรียน
+                    </button>
+                    <button onclick="switchTab('attendance')" id="tab-attendance" class="flex items-center px-3 py-1.5 text-sm font-medium rounded-md">
+                        <i data-lucide="camera" class="w-4 h-4 mr-1.5"></i>เช็คชื่อ
+                    </button>
+                    <button onclick="switchTab('manage')" id="tab-manage" class="flex items-center px-3 py-1.5 text-sm font-medium rounded-md">
+                        <i data-lucide="book-copy" class="w-4 h-4 mr-1.5"></i>จัดการรายวิชา
+                    </button>
+                    <button onclick="switchTab('report')" id="tab-report" class="flex items-center px-3 py-1.5 text-sm font-medium rounded-md">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-1.5"></i>รายงาน
+                    </button>
+                    <button onclick="switchTab('summary')" id="tab-summary" class="flex items-center px-3 py-1.5 text-sm font-medium rounded-md">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4 mr-1.5"></i>สรุปผล
+                    </button>
+                    <a href="YOUR_URL_HERE" target="_blank" rel="noopener noreferrer" 
+                        class="flex items-center px-3 py-1.5 text-sm font-medium rounded-md text-emerald-700 dark:text-emerald-200 hover:bg-emerald-200 dark:hover:bg-emerald-700 transition-colors duration-200">
+                        <i data-lucide="external-link" class="w-4 h-4 mr-1.5"></i>เมนนูว่าง
+                    </a>
                 </nav>
                 <button onclick="toggleTheme()" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5">
                     <i data-lucide="sun" id="theme-icon-sun" class="hidden w-5 h-5"></i>
@@ -83,14 +96,14 @@
                    </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-6">
-                        <div class="lg:col-span-2 bg-blue-200 dark:bg-gray-800 p-4 rounded-lg shadow-md border-2 border-pink-500 dark:border-pink-700">
+                        <div class="lg:col-span-2 bg-blue-100 dark:bg-gray-800 p-4 rounded-lg shadow-md border-2 border-pink-500 dark:border-pink-700">
                        <h3 class="font-semibold mb-2 text-center">สรุปการเข้าเรียนภาพรวม</h3>
                              <div class="max-w-[250px] mx-auto">
                                 <canvas id="attendance-pie-chart"></canvas>
                              </div>
                          </div>
 
-                        <div class="lg:col-span-3 bg-blue-200 dark:bg-gray-800 p-4 rounded-lg shadow-md border-2 border-pink-500 dark:border-pink-700">
+                        <div class="lg:col-span-3 bg-blue-100 dark:bg-gray-800 p-4 rounded-lg shadow-md border-2 border-pink-500 dark:border-pink-700">
                             <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
           
                        <h3 class="font-semibold text-gray-800 dark:text-gray-200">ภาพรวมรายวิชา</h3>
@@ -116,7 +129,7 @@
                     </div>
                 </div>
    
-                 <div class="bg-blue-200 dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border-2 border-pink-500 dark:border-pink-700">
+                 <div class="bg-blue-100 dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border-2 border-pink-500 dark:border-pink-700">
                     <h3 class="font-semibold mb-4">รายชื่อนักเรียนในระบบ</h3>
                      <div id="student-roster-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-h-[60vh] overflow-y-auto custom-scrollbar pr-2"></div>
                      <div id="roster-loading" class="text-center py-8"><div class="loader w-12 h-12 rounded-full border-4 border-gray-200 dark:border-gray-700 mx-auto"></div><p class="mt-4 text-gray-600 dark:text-gray-400">กำลังโหลดข้อมูลนักเรียน...</p></div>
