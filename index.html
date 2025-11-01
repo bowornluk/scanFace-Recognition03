@@ -59,7 +59,7 @@
                         <input type="date" id="dashboard-date" class="border rounded-lg p-2 w-full sm:w-auto bg-transparent dark:text-gray-200 dark:border-gray-600">
                     </div>
       
-                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-center">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-center">
                         <div class="bg-blue-100 dark:bg-blue-900/50 p-4 rounded-lg"><h3 class="text-gray-600 dark:text-gray-400">มาเรียน (รวมทุกวิชา)</h3><p id="stat-present" class="text-3xl font-bold text-blue-700 dark:text-blue-400">0</p></div>
                         <div class="bg-red-100 dark:bg-red-900/50 p-4 rounded-lg"><h3 class="text-gray-600 dark:text-gray-400">ขาด/ลา (รวมทุกวิชา)</h3><p id="stat-absent" class="text-3xl font-bold text-red-700 dark:text-red-400">0</p></div>
                    </div>
@@ -75,7 +75,7 @@
                         <div class="lg:col-span-3 bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
                             <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
           
-                               <h3 class="font-semibold text-gray-800 dark:text-gray-200">ภาพรวมรายวิชา</h3>
+                       <h3 class="font-semibold text-gray-800 dark:text-gray-200">ภาพรวมรายวิชา</h3>
                                 <div class="flex-shrink-0">
                                     <select id="summary-period" class="border rounded-lg p-1.5 bg-transparent dark:text-gray-200 dark:border-gray-600 text-sm">
                                         <option value="day">รายวัน</option>
@@ -159,13 +159,13 @@
                         <select id="class-select" class="w-full border rounded-lg p-3 bg-transparent dark:text-gray-200 dark:border-gray-600">
                             <option value="">-- กรุณาเลือกชั้นเรียน --</option>
                         </select>
-                    </div>
+                   </div>
                    <div class="max-w-xs mx-auto mb-6">
                         <label for="subject-select" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 text-left">2. เลือกรายวิชา:</label>
                         <select id="subject-select" class="w-full border rounded-lg p-3 bg-transparent dark:text-gray-200 dark:border-gray-600" disabled>
                             <option value="">-- กรุณาเลือกรายวิชา --</option>
                         </select>
-                    </div>
+                     </div>
                     <button id="start-scan-btn" onclick="startScanning()" class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 text-lg font-semibold flex items-center justify-center mx-auto gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
                         <i data-lucide="camera"></i><span>เริ่มเช็คชื่อ</span>
                     </button>
@@ -180,7 +180,7 @@
                     <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md flex flex-col items-center">
                         <h2 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">กำลังสแกน... <span id="current-subject-display" class="font-normal text-blue-600 dark:text-blue-400"></span></h2>
    
-                        <div class="max-w-xs mx-auto mb-4 w-full">
+                         <div class="max-w-xs mx-auto mb-4 w-full">
                             <label for="camera-select" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 text-center">เลือกกล้อง:</label>
                             <select id="camera-select" class="w-full border rounded-lg p-2 bg-transparent dark:text-gray-200 dark:border-gray-600 disabled:bg-gray-700" disabled>
                                 <option>กำลังโหลดรายการกล้อง...</option>
@@ -202,8 +202,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button onclick="stopScanning()" class="bg-red-600 text-white px-8 py-3 rounded-full hover:bg-red-700 text-lg font-semibold flex 
- items-center justify-center mx-auto gap-2">
+                        <button onclick="stopScanning()" class="bg-red-600 text-white px-8 py-3 rounded-full hover:bg-red-700 text-lg font-semibold flex items-center justify-center mx-auto gap-2">
                             <i data-lucide="stop-circle"></i><span>สิ้นสุดการเช็คชื่อ</span>
                         </button>
                     </div>
@@ -484,7 +483,7 @@
                     </div>
     
                  </div>
-               <input type="hidden" id="subject-image-data">
+                <input type="hidden" id="subject-image-data">
                 <div class="flex justify-end space-x-4 mt-8">
                     <button type="button" onclick="closeSubjectModal()" class="bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 px-6 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500">ยกเลิก</button>
                     <button type="submit" id="form-submit-btn-subject" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">บันทึก</button>
@@ -511,7 +510,6 @@
         let studentSortOrder = 'asc';
         let summaryReportData = {}; 
         let activeTab = 'dashboard';
-
         // --- THEME ---
         function applyTheme(theme) {
             const chartTextColor = theme === 'dark' ? 'rgba(229, 231, 235, 0.8)' : 'rgba(55, 65, 81, 0.9)';
@@ -592,6 +590,7 @@
                 if (contentEl) contentEl.classList.add('hidden');
                 if (tabEl) {
                   
+ 
                      tabEl.classList.remove('bg-blue-600', 'text-white');
                     tabEl.classList.add('text-gray-600', 'dark:text-gray-300');
                 }
@@ -636,6 +635,7 @@
                     mode: 'cors',
                     redirect: 'follow',
    
+ 
                                       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
@@ -722,6 +722,7 @@
                 if (rec.status === 'มาเรียน') {
                     presentCount++;
                 
+ 
                 } else {
                     absentOrLeaveCount++;
                 }
@@ -744,14 +745,17 @@
                         let borderColorClass = 'border-gray-300 dark:border-gray-600';
                         if (attendancePercent >= 80) {
                   
+ 
                            borderColorClass = 'border-green-400';
                         } else if (attendancePercent >= 60) {
                             borderColorClass = 'border-yellow-400';
-                        } else if (totalStudents > 0) {
+           
+                         } else if (totalStudents > 0) {
                             borderColorClass = 'border-red-500';
                         }
     
-                        const cardHtml = `
+                       
+                         const cardHtml = `
              
                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-200">
                             <img src="${item.teacherImage || 'https://placehold.co/150x150/e2e8f0/475569?text=?'}" 
@@ -762,40 +766,48 @@
     
                             <div class="flex justify-around w-full mb-3">
                              
+ 
                                <div class="text-green-500">
                                     <i data-lucide="user-check" class="mx-auto w-6 h-6"></i>
-                                    <p class="text-xl font-bold">${item.present}</p>
+                            
+                         <p class="text-xl font-bold">${item.present}</p>
                   
                                    <p class="text-xs">มาเรียน</p>
                                 </div>
-                                <div class="text-red-500">
+    
+                                 <div class="text-red-500">
                 
                                      <i data-lucide="user-x" class="mx-auto w-6 h-6"></i>
-                                    <p class="text-xl font-bold">${item.absentOrLeave}</p>
+              
+                               <p class="text-xl font-bold">${item.absentOrLeave}</p>
                                     <p class="text-xs">ขาด/ลา</p>
  
                                  </div>
-                            </div>
+     
+                             </div>
     
                             <div class="w-full text-left">
        
                                  <p class="text-xs text-gray-600 dark:text-gray-300 mb-1">คิดเป็น ${attendancePercent.toFixed(1)}%</p>
                                 <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                                  
-                                   <div class="bg-blue-500 h-2 rounded-full" style="width: ${attendancePercent.toFixed(1)}%"></div>
+                            
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: ${attendancePercent.toFixed(1)}%"></div>
                                 </div>
                             </div>
                         </div>
-        
+    
+     
                          `;
-                        cardsContainer.innerHTML += cardHtml;
+                         cardsContainer.innerHTML += cardHtml;
                  });
                      lucide.createIcons(); 
                 } else {
                      cardsContainer.innerHTML = `
                         <div class="text-center py-8 md:col-span-2">
                             <i data-lucide="inbox" class="mx-auto w-12 h-12 text-gray-400"></i>
-             
+          
+    
                                <p class="mt-2 text-sm text-gray-500">ไม่มีข้อมูลการเช็คชื่อ</p>
                         </div>
                      `;
@@ -809,6 +821,7 @@
                         <i data-lucide="server-crash" class="mx-auto w-12 h-12 text-red-400"></i>
                         <p class="mt-2 text-sm text-red-500">ไม่สามารถโหลดข้อมูลได้</p>
                
+ 
                      </div>
                 `;
                  lucide.createIcons();
@@ -840,8 +853,9 @@
                         const option = new Option(subject.subjectname, subject.subjectname);
                         subjectSelect.appendChild(option);
                
+ 
              });
-                }
+                 }
                 
                subjectSelect.onchange = () => {
                     const selectedValue = subjectSelect.value;
@@ -860,13 +874,14 @@
                     if (hasValue) {
                         const selectedSubject = subjects.find(s => s.subjectname === selectedValue);
                         if (selectedSubject) {
-                            teacherImage.src = selectedSubject.teacherimage || 'https://placehold.co/150x150/e2e8f0/475569?text=?'; 
+                            teacherImage.src = selectedSubject.teacherimage ||
+ 'https://placehold.co/150x150/e2e8f0/475569?text=?'; 
                             teacherSubject.innerText = selectedSubject.subjectname; 
                             teacherName.innerText = `สอนโดย: ${selectedSubject.teachername}`; 
                             teacherInfoDiv.classList.remove('hidden'); 
                         }
                     } else {
-                        teacherInfoDiv.classList.add('hidden'); 
+                        teacherInfoDiv.classList.add('hidden');
                     }
                 };
             } catch (error) {
@@ -877,12 +892,11 @@
         async function loadClassesForDropdown() {
             const classSelect = document.getElementById('class-select');
             classSelect.innerHTML = '<option value="">-- กรุณาเลือกชั้นเรียน --</option>';
-            // ดึงรายชื่อคลาสที่ไม่ซ้ำกันจาก students [cite: 875, 884]
+            // ดึงรายชื่อคลาสที่ไม่ซ้ำกันจาก students
             const classes = [...new Set(students.map(s => s.class))].filter(Boolean);
             classes.sort().forEach(className => {
                 classSelect.add(new Option(className, className));
             });
-
             // เพิ่ม Event Listener
             classSelect.onchange = () => {
                 const selectedClass = classSelect.value;
@@ -914,19 +928,24 @@
         async function updateFaceMatcherForClass(filteredStudents) {
             if (filteredStudents.length > 0) {
                 const labeledFaceDescriptors = await Promise.all(filteredStudents.map(async (student) => {
-                    if (student.imagedatabase64 && student.imagedatabase64.startsWith('data:image')) { [cite: 855]
-                        try {
-                            const img = await faceapi.fetchImage(student.imagedatabase64); [cite: 855]
-                            const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor(); [cite: 855]
-                            if (detections) return new faceapi.LabeledFaceDescriptors(student.name, [detections.descriptor]); [cite: 856]
+                    if (student.imagedatabase64 && student.imagedatabase64.startsWith('data:image')) {
+ 
+                         try {
+                            const img = await faceapi.fetchImage(student.imagedatabase64);
+                            const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+        
+                         if (detections) return new faceapi.LabeledFaceDescriptors(student.name, [detections.descriptor]);
                         } catch (e) { console.error(`Could not process image for ${student.name}`, e); }
                     }
-                    return null; [cite: 857]
+                  
+                     return null;
                 }));
-                const validDescriptors = labeledFaceDescriptors.filter(Boolean); [cite: 858]
-                faceMatcher = validDescriptors.length > 0 ? new faceapi.FaceMatcher(validDescriptors, 0.6) : null; [cite: 858]
+                 const validDescriptors = labeledFaceDescriptors.filter(Boolean);
+                faceMatcher = validDescriptors.length > 0 ?
+ new faceapi.FaceMatcher(validDescriptors, 0.6) : null;
             } else {
-                faceMatcher = null; [cite: 859]
+                faceMatcher = null;
+ 
             }
         }
         function startScanning() {
@@ -981,17 +1000,21 @@
                     item.className = 'flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg';
                     item.id = `student-row-${student.id}`;
   
+ 
                                      
                     const studentInfoHtml = `
                         <div class="flex items-center gap-3">
-              
+             
+  
                            <img src="${student.imagedatabase64 || 'https://placehold.co/40x40'}" class="w-10 h-10 rounded-full object-cover">
                             <div>
                                 <p class="font-medium">${student.name}</p>
-                  
+    
+               
                                <p class="text-sm text-gray-500">${student.id}</p>
                                </div>
-                        </div>`;
+                      
+                     </div>`;
 
                     item.innerHTML = studentInfoHtml + `<div class="flex items-center gap-2" id="status-container-${student.id}"></div>`;
                     studentList.appendChild(item);
@@ -1017,8 +1040,9 @@
                     <button onclick="editStatus('${studentId}')" class="text-blue-600 hover:text-blue-800 text-sm p-1">
                         <i data-lucide="edit-2" class="w-4 h-4"></i>
               
+ 
                       </button>`;
-            } else {
+                 } else {
                 const buttonBaseClasses = "px-3 py-1 text-sm rounded-full transition-colors duration-200";
                 const defaultButtonClasses = "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600";
                 statusContainer.innerHTML = `
@@ -1026,9 +1050,10 @@
                         <button onclick="markStatus('${studentId}', 'มาเรียน')" class="${buttonBaseClasses} ${defaultButtonClasses}">มาเรียน</button>
                         <button onclick="markStatus('${studentId}', 'ขาด')" class="${buttonBaseClasses} ${defaultButtonClasses}">ขาด</button>
          
+ 
                           <button onclick="markStatus('${studentId}', 'ลา')" class="${buttonBaseClasses} ${defaultButtonClasses}">ลา</button>
                     </div>`;
-            }
+                 }
             lucide.createIcons();
         }
         function editStatus(studentId) {
@@ -1042,6 +1067,7 @@
                     <button onclick="markStatus('${studentId}', 'มาเรียน')" class="${buttonBaseClasses} ${defaultButtonClasses}">มาเรียน</button>
                     <button onclick="markStatus('${studentId}', 'ขาด')" class="${buttonBaseClasses} ${defaultButtonClasses}">ขาด</button>
                     <button 
+ 
  onclick="markStatus('${studentId}', 'ลา')" class="${buttonBaseClasses} ${defaultButtonClasses}">ลา</button>
                 </div>`;
             const existingRecord = checkedInToday.get(String(studentId));
@@ -1110,16 +1136,19 @@
             // **MODIFIED:** Use filtered student list
             studentsForAttendance.forEach(student => {
                 if (!checkedInToday.has(String(student.id))) {
-                    const absentRecord = {
+                    
+                     const absentRecord = {
               
                            id: student.id, name: student.name, class: student.class,
                         timestamp: new Date().toISOString(),
-                        location: currentGeoLocation ? `${currentGeoLocation.lat},${currentGeoLocation.lng}` : 'N/A',
+                        location: 
+ currentGeoLocation ? `${currentGeoLocation.lat},${currentGeoLocation.lng}` : 'N/A',
                         status: 'ขาด', subject: currentSubject
   
                                        };
                     checkedInToday.set(String(student.id), absentRecord);
-                }
+       
+                 }
             });
             const recordsToSave = Array.from(checkedInToday.values());
 
@@ -1128,10 +1157,12 @@
                     const response = await apiCall({ 
                         action: 'recordAttendanceBulk', 
                        
+ 
                       data: {
                             records: recordsToSave,
                             subject: currentSubject,
-                            date: new Date().toISOString().split('T')[0]
+                   
+                         date: new Date().toISOString().split('T')[0]
          
                                   } 
                     });
@@ -1190,26 +1221,30 @@
                     
                     recognitionInterval = setInterval(async () => {
                         // **MODIFIED:** Check for pause
-                        if (!isScanning || isScanningPaused) return; 
+                       
+                         if (!isScanning || isScanningPaused) return; 
                         
                         const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
                         const resizedDetections = faceapi.resizeResults(detections, displaySize);
-                        
+              
+           
                         overlay.getContext('2d').clearRect(0, 0, overlay.width, overlay.height);
                         if (faceMatcher) {
                             resizedDetections.forEach(d => {
-                                const bestMatch = faceMatcher.findBestMatch(d.descriptor);
+       
+                                 const bestMatch = faceMatcher.findBestMatch(d.descriptor);
                                 new faceapi.draw.DrawBox(d.detection.box, { label: bestMatch.toString() }).draw(overlay);
                                 
-                                if (bestMatch.label !== 'unknown') {
+   
+                                     if (bestMatch.label !== 'unknown') {
                                     const student = students.find(s => s.name === bestMatch.label);
-                                    // **MODIFIED:** Check against checkedInToday
+                                     // **MODIFIED:** Check against checkedInToday
                                     if (student && !checkedInToday.has(String(student.id))) {
                                         handleRecognition(student);
-                                    }
+                                     }
                                 }
                             });
-                        }
+                         }
                     }, 700); // **MODIFIED:** Changed from 300 to 700 (more stable, like old system)
                 };
             } catch (err) {
@@ -1233,7 +1268,9 @@
             const record = { 
                 id: student.id, name: student.name, class: student.class, 
                 timestamp: new Date().toISOString(), 
-                location: currentGeoLocation ? `${currentGeoLocation.lat},${currentGeoLocation.lng}` : 'N/A', 
+    
+                         location: currentGeoLocation ?
+ `${currentGeoLocation.lat},${currentGeoLocation.lng}` : 'N/A', 
                 status: 'มาเรียน', 
                 subject: currentSubject 
             };
@@ -1241,8 +1278,7 @@
 
             isScanningPaused = true; // Pause scanning
             speak(`สวัสดีค่ะ ${student.name} บันทึกแล้วค่ะ`);
-
-            // Keep visual feedback from new system
+             // Keep visual feedback from new system
             const successOverlay = document.getElementById('scan-success-overlay');
             document.getElementById('scan-success-name').innerText = student.name;
             successOverlay.classList.remove('hidden');
@@ -1324,16 +1360,19 @@
                 row.innerHTML = `
                     <td class="p-2"><img src="${student.imagedatabase64 || 'https://placehold.co/40x40/e2e8f0/475569?text=?'}" class="w-10 h-10 rounded-full object-cover"></td>
                     
+ 
                      <td class="p-3">${student.id}</td>
                     <td class="p-3">${student.name}</td>
                     <td class="p-3">${student.class}</td>
                     <td class="p-3 text-center"></td>`;
-                
+              
+   
                  const actionsCell = row.cells[4];
                 const editButton = document.createElement('button');
                 editButton.className = 'text-blue-600 p-1 hover:underline';
                 editButton.innerHTML = `<i data-lucide="edit" class="inline-block w-4 h-4 mr-1"></i>แก้ไข`;
-                editButton.onclick = () => openStudentModal(student);
+                
+                 editButton.onclick = () => openStudentModal(student);
                 
  
                    const deleteButton = document.createElement('button');
@@ -1356,6 +1395,7 @@
                 if (studentSortOrder === 'asc') {
                     return String(idA).localeCompare(String(idB), undefined, {numeric: true});
             
+ 
                  } else {
                     return String(idB).localeCompare(String(idA), undefined, {numeric: true});
                 }
@@ -1476,20 +1516,22 @@
                 row.innerHTML = `
                     <td class="p-2"><img src="${subject.teacherimage || 'https://placehold.co/40x40/e2e8f0/475569?text=?'}" class="w-10 h-10 rounded-full object-cover"></td>
                     
+ 
                      <td class="p-3">${subject.subjectname}</td>
                     <td class="p-3">${subject.teachername}</td>
                     <td class="p-3 text-center"></td>`;
                 
-                const actionsCell = row.cells[3];
+                const actionsCell = 
+ row.cells[3];
                 const editButton = document.createElement('button');
   
                                editButton.className = 'text-blue-600 p-1 hover:underline';
                 editButton.innerHTML = `<i data-lucide="edit" class="inline-block w-4 h-4 mr-1"></i>แก้ไข`;
                 editButton.onclick = () => openSubjectModal(subject);
+ 
                 
                 const deleteButton = document.createElement('button');
-    
-                           deleteButton.className = 'text-red-600 p-1 ml-2 hover:underline';
+                 deleteButton.className = 'text-red-600 p-1 ml-2 hover:underline';
                  deleteButton.innerHTML = `<i data-lucide="trash-2" class="inline-block w-4 h-4 mr-1"></i>ลบ`;
                 deleteButton.onclick = () => deleteSubject(subject.rowIndex);
     
@@ -1602,20 +1644,23 @@
                         const row = `<tr>
                                 <td class="p-3 text-left">${item.class}</td>
         
+ 
                                  <td class="p-3 text-left">${item.subject}</td>
                                 <td class="p-3 text-center">${item.totalStudents}</td>
-                                <td class="p-3 text-center">${item.present}</td>
+                               
+                                 <td class="p-3 text-center">${item.present}</td>
       
                                    <td class="p-3 text-center">${item.absent}</td>
                                 <td class="p-3 text-center">${item.leave}</td>
-                                <td class="p-3 text-center font-bold">${item.totalPresent}</td>
+                    
+                         <td class="p-3 text-center font-bold">${item.totalPresent}</td>
    
                                      <td class="p-3 text-center font-bold">${item.attendancePercent}%</td>
                             </tr>`;
-                        reportTableBody.innerHTML += row;
+              
+                         reportTableBody.innerHTML += row;
               
                    });
-                    
                     const absentPreview = lineData.map(d => `<div><span class="text-red-500">[ขาด/ลา]</span> ${d.id} ${d.name} (${d.status})</div>`).join('');
                     const presentPreview = presentData.map(d => `<div><span class="text-green-500">[มาเรียน]</span> ${d.id} ${d.name}</div>`).join('');
                     linePreview.innerHTML = absentPreview + presentPreview || '<p class="text-gray-500">ไม่มีข้อมูลนักเรียน</p>';
@@ -1706,23 +1751,27 @@
                     
                     summaryReportData.summary.forEach(item => {
                         const totalAttendance = item.present + item.absent + item.leave;
-                        const attendancePercent = totalAttendance > 0 ? ((item.present / totalAttendance) * 100).toFixed(2) : "0.00";
+                        const attendancePercent 
+ = totalAttendance > 0 ? ((item.present / totalAttendance) * 100).toFixed(2) : "0.00";
                         const row = document.createElement('tr');
                         row.className = 'summary-row cursor-pointer';
                         row.onclick = () => showStudentDetail(item.class, item.subject);
       
  
+ 
                          row.innerHTML = `
                             <td class="p-3">${item.class}</td>
                             <td class="p-3 font-medium">${item.subject}</td>
-              
+             
+  
                                <td class="p-3 text-center">${item.totalStudents}</td>
                             <td class="p-3 text-center text-green-600">${item.present}</td>
                             <td class="p-3 text-center text-red-600">${item.absent}</td>
-                     
+    
+                  
                            <td class="p-3 text-center text-yellow-600">${item.leave}</td>
                             <td class="p-3 text-center font-bold">${attendancePercent}%</td>`;
-                        tableBody.appendChild(row);
+                         tableBody.appendChild(row);
                     });
                     document.getElementById('export-excel-btn').classList.remove('hidden');
                 } else {
@@ -1747,28 +1796,33 @@
                 const leaveCount = studentRecords.filter(r => r.status === 'ลา').length;
       
  
+ 
                            const scoreKey = `${student.id}|${subjectName}`;
                 const currentScore = summaryReportData.scores[scoreKey] || '';
     
                 const row = document.createElement('tr');
                 row.innerHTML = `
-        
+       
+  
                            <td class="p-2">${student.id}</td>
                     <td class="p-2">${student.name}</td>
                     <td class="p-2 text-center">${presentCount}</td>
                     <td class="p-2 text-center">${absentCount}</td>
-                    <td 
+      
+                               <td 
  class="p-2 text-center">${leaveCount}</td>
                      <td class="p-2 text-center">
                         <input type="number" class="w-20 text-center border rounded p-1 bg-white dark:bg-gray-800"
-                               data-studentid="${student.id}"
+                            
+       data-studentid="${student.id}"
              
                                    data-class="${className}"
                                data-subject="${subjectName}"
-                               value="${currentScore}">
+                  
+                             value="${currentScore}">
                    
                  </td>`;
-                detailTableBody.appendChild(row);
+                 detailTableBody.appendChild(row);
             });
     
             detailContainer.classList.remove('hidden');
@@ -1784,6 +1838,7 @@
                     input.dataset.class,
                     input.dataset.subject,
                   
+ 
                       input.value
                 ]);
             });
@@ -1818,11 +1873,13 @@
                 const attendancePercent = totalAttendance > 0 ? ((item.present / totalAttendance) * 100).toFixed(2) : "0.00";
                 return {
  
+ 
                     'ชั้น': item.class,
                     'รายวิชา': item.subject,
                     'นักเรียนทั้งหมด': item.totalStudents,
                     'มา': item.present,
                 
+ 
                     'ขาด': item.absent,
                     'ลา': item.leave,
                     '% การเข้าเรียน': attendancePercent
@@ -1878,7 +1935,8 @@
                     const option = document.createElement('option');
                     option.value = device.deviceId;
                     option.text = device.label || `Camera ${index + 1}`;
-                    cameraSelect.appendChild(option);
+        
+                     cameraSelect.appendChild(option);
                 });
                 cameraSelect.disabled = false;
             } catch (err) {
@@ -1892,7 +1950,8 @@
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
-                    pos => { currentGeoLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude }; },
+                    pos => { currentGeoLocation 
+ = { lat: pos.coords.latitude, lng: pos.coords.longitude }; },
               
                        () => { console.warn('Could not get location.'); }
                 );
