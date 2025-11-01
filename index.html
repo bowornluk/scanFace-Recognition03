@@ -1228,7 +1228,7 @@
             
             const constraints = { video: { deviceId: { exact: selectedDeviceId } } };
             
-            // Mirroring logic (from V3.4) [cite: 721-724]
+            // Mirroring logic
             const selectedDevice = videoDevices.find(d => d.deviceId === selectedDeviceId);
             const isRearCamera = selectedDevice?.label.toLowerCase().includes('back');
             if (isRearCamera) {
@@ -1239,10 +1239,11 @@
                 overlay.style.transform = "scaleX(-1)";
             }
 
-            // New stream logic (from V3.4) 
+            // New stream logic with manual .play()
             navigator.mediaDevices.getUserMedia(constraints)
                 .then(stream => {
                     video.srcObject = stream;
+                    video.play(); // <-- **เพิ่มคำสั่งนี้เพื่อบังคับให้เริ่มเล่น**
                     // The 'play' event listener (in window.onload) will handle the rest
                 })
                 .catch(err => {
@@ -1252,15 +1253,6 @@
                 });
         }
         
-       async function loadStudentDataForRecognition() {
-            // เราย้าย Logic การสร้าง faceMatcher ไปที่ updateFaceMatcherForClass() แล้ว
-            // ฟังก์ชันนี้จึงแค่ทำการโหลดข้อมูลนักเรียนตามปกติ
-            try {
-                 await loadStudentData();
-            } catch (err) {
-                console.error('Error loading students for recognition:', err);
-            }
-        }
         function handleRecognition(student) {
             // **MODIFIED:** Using Speech + Pause logic from old system
             const record = { 
