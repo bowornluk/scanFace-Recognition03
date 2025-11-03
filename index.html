@@ -1196,7 +1196,7 @@
         }
 
        function startVideo() {
-            if (video && video.srcObject) { video.srcObject.getTracks().forEach(track => track.stop()); }
+            // ** ลบการหยุดกล้องจากตรงนี้ **
 
             const selectedDeviceId = document.getElementById('camera-select').value;
             if (!selectedDeviceId) {
@@ -1206,6 +1206,8 @@
             }
             
             const constraints = { video: { deviceId: { exact: selectedDeviceId } } };
+            
+            // Mirroring logic
             const selectedDevice = videoDevices.find(d => d.deviceId === selectedDeviceId);
             const isRearCamera = selectedDevice?.label.toLowerCase().includes('back');
             if (isRearCamera) {
@@ -1216,8 +1218,16 @@
                 overlay.style.transform = "scaleX(-1)";
             }
 
+            // New stream logic
             navigator.mediaDevices.getUserMedia(constraints)
                 .then(stream => {
+                    // --- ✅ เพิ่มการหยุดกล้องเก่าไว้ตรงนี้ ---
+                    // หลังจากได้สตรีมใหม่แล้ว ค่อยหยุดสตรีมเก่า
+                    if (video && video.srcObject) { 
+                        video.srcObject.getTracks().forEach(track => track.stop()); 
+                    }
+                    // --- -------------------------- ---
+
                     video.srcObject = stream;
                     video.play();
                 })
@@ -1887,6 +1897,11 @@
                      cameraSelect.appendChild(option);
                 });
                 cameraSelect.disabled = false;
+                cameraSelect.addEventListener('change', () => {
+    if (isScanning) {
+        startVideo(); // สั่งให้เริ่มวิดีโอใหม่ด้วยกล้องที่เลือก
+    }
+});
             } catch (err) {
                 console.error("Error enumerating devices:", err);
                 cameraSelect.innerHTML = '<option>ไม่สามารถเข้าถึงกล้อง</option>';
