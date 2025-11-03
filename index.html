@@ -198,6 +198,12 @@
                             <option value="">-- กรุณาเลือกรายวิชา --</option>
                         </select>
                    </div>
+                    <div class="max-w-xs mx-auto mb-4 w-full">
+                            <label for="camera-select" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 text-center">เลือกกล้อง:</label>
+                            <select id="camera-select" class="w-full border rounded-lg p-2 bg-transparent dark:text-gray-200 dark:border-gray-600 disabled:bg-gray-700" disabled>
+                                <option>กำลังโหลดรายการกล้อง...</option>
+                            </select>
+                        </div>
                     <button id="start-scan-btn" onclick="startScanning()" class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 text-lg font-semibold flex items-center justify-center mx-auto gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
                         <i data-lucide="camera"></i><span>เริ่มเช็คชื่อ</span>
                     </button>
@@ -212,12 +218,7 @@
                     <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg flex flex-col items-center">
                         <h2 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">กำลังสแกน... <span id="current-subject-display" class="font-normal text-blue-600 dark:text-blue-400"></span></h2>
    
-                         <div class="max-w-xs mx-auto mb-4 w-full">
-                            <label for="camera-select" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 text-center">เลือกกล้อง:</label>
-                            <select id="camera-select" class="w-full border rounded-lg p-2 bg-transparent dark:text-gray-200 dark:border-gray-600 disabled:bg-gray-700" disabled>
-                                <option>กำลังโหลดรายการกล้อง...</option>
-                            </select>
-                        </div>
+                         
    
                           <div id="video-loader" class="flex flex-col items-center justify-center h-64 w-full">
                             <div class="loader w-12 h-12 rounded-full border-4 border-gray-200 dark:border-gray-700"></div>
@@ -981,7 +982,7 @@
             document.getElementById('scanning-section').classList.remove('hidden');
             document.getElementById('absence-management-section').classList.add('hidden');
             isScanning = true;
-            document.getElementById('camera-select').disabled = true;
+            
             startVideo();
         }
         async function startManualCheck() {
@@ -1093,7 +1094,7 @@
         }
         function stopScanning(showStudentList = true) {
             isScanning = false;
-            document.getElementById('camera-select').disabled = false;
+            
             if (recognitionInterval) clearInterval(recognitionInterval);
             recognitionInterval = null;
 
@@ -1897,11 +1898,7 @@
                      cameraSelect.appendChild(option);
                 });
                 cameraSelect.disabled = false;
-                cameraSelect.addEventListener('change', () => {
-    if (isScanning) {
-        startVideo(); // สั่งให้เริ่มวิดีโอใหม่ด้วยกล้องที่เลือก
-    }
-});
+                
             } catch (err) {
                 console.error("Error enumerating devices:", err);
                 cameraSelect.innerHTML = '<option>ไม่สามารถเข้าถึงกล้อง</option>';
